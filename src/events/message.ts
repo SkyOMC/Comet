@@ -1,8 +1,7 @@
 import { event, Events } from '../utils/index.js';
-import { Collection, ReactionUserManager } from 'discord.js';
+import { Collection } from 'discord.js';
 import Commands from '../commands/index.js';
 import Client from '../structs/client.js';
-import { parse } from 'path';
 
 export default event(Events.MessageCreate, ({ log }, msg: any) => {
     if(!msg.content.startsWith("c!")) return;
@@ -35,7 +34,7 @@ export default event(Events.MessageCreate, ({ log }, msg: any) => {
     try {
             if(!cmd.enabled) return msg.channel.send("This command is disabled");
             if(cmd.owner){
-                return msg.author.id === "849283841583743036" ? cmd.execute(Client, msg, args) : msg.channel.send("This is an owner-only command...")
+                return msg.author.id === "1119420130112315452" ? cmd.execute(Client, msg, args) : msg.channel.send("This is an owner-only command...")
             } else if(cmd.permissions.length > 0){
                 const permissions = cmd.permissions
                 for(const perm of permissions){
