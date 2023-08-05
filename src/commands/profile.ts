@@ -1,4 +1,5 @@
 import meta from 'meta-discord';
+import type { Message } from "discord.js";
 import { AttachmentBuilder } from 'discord.js';
 
 export default {
@@ -7,12 +8,12 @@ export default {
     owner: false,
     permissions: ["SendMessages"],
     enabled: true,
-    async execute(client, message, args){
+    async execute(client, message: Message<true>, args){
         const msg = await message.reply("please wait");
 
-        const ide = message.mentions.members.first().id || message.author.id
+        const ide = message.author.id
 
-if(ide === '849283841583743036'){
+if(ide === '1119420130112315452'){
     const buffer = await meta.profileImage(ide, {
         customTag: "Developer",
         customBackground: "https://cdn.discordapp.com/attachments/1128049815541010524/1128456921322618951/clyde-rs-4XbZCfU2Uoo-unsplash.jpg",
@@ -25,7 +26,8 @@ if(ide === '849283841583743036'){
        await msg.edit({ files: [image] })
         } else if(ide === client.user.id){
             const buffer = await meta.profileImage(ide, {
-                customTag: "Comet",
+                customTag: "The Bot",
+                customBackground: "https://cdn.discordapp.com/attachments/1128049815541010524/1128456921322618951/clyde-rs-4XbZCfU2Uoo-unsplash.jpg",
                 usernameColor: '#d9dfef',
                 customBadges: ["https://cdn.discordapp.com/attachments/1081881878304395374/1109424250605015071/3721-verified.png"],
                 borderColor: ['#4a9edf', '#4275b7']

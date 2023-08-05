@@ -10,7 +10,7 @@ import filecmd from './file.js';
 import help from './help.js';
 import hangman from './hangman.js';
 import snake from './snake.js';
-import test from './test.js';
+import profile from './profile.js';
 
 const arr: Array<any> = [
     ping,
@@ -24,7 +24,7 @@ const arr: Array<any> = [
     help,
     snake,
     hangman,
-    test
+    profile
 ]
 
 const file: any = {

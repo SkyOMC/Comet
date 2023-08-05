@@ -1,5 +1,7 @@
 import economy from '../utils/Schemas/economy.js';
 import { EmbedBuilder } from 'discord.js';
+import type { Client, Message, User } from 'discord.js';
+import type { Query, Model } from "mongoose";
 
 export default {
     name: 'stars',
@@ -7,10 +9,11 @@ export default {
     owner: false,
     permissions: ["SendMessages"],
     enabled: true,
-    async execute(client, message, args){
-        let user;
+    async execute(client: Client<true>, message: Message<true>, args: string[]){
+        let user: User;
          user = message.author
-        const data: any = await economy.model.findOne({ User: user.id })
+        const model: any = await economy.model
+        const data = model.findOne({ User: user.id })
         const error = new EmbedBuilder()
         .setTitle('Error')
         .setDescription("you are not registered yet, please use `c!register` first!")
