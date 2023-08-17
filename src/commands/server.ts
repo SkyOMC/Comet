@@ -2,11 +2,10 @@ import { EmbedBuilder } from 'discord.js';
 import type { Client, Message } from 'discord.js';
 
 
-module.exports = {
-    data: {
+export default {
         name: "server",
-        aliases: ["serverinfo", "si", "guild"]
-    },
+        aliases: ["serverinfo", "si", "guild"],
+        enabled: true,
     async execute(client: Client<true>, message: Message<true>, args: string[]) {
  
         const { guild } = message;

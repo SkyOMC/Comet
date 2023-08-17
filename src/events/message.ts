@@ -1,12 +1,19 @@
 import { event, Events } from '../utils/index.js';
-import { Collection } from 'discord.js';
+import { Collection, User } from 'discord.js';
 import Commands from '../commands/index.js';
 import Client from '../structs/client.js';
+const noprefix: Array<string> = [];
 
 export default event(Events.MessageCreate, ({ log }, msg: any) => {
-    if(!msg.content.startsWith("c!")) return;
-
-    const content = msg.content.slice(2).split(" ");
+    let num: number;
+    if(noprefix.includes(msg.author.id)){
+        if(msg.content.startsWith("b!")) num = 2;
+        else num = 0
+} else{ 
+    num = 2;
+    if(!msg.content.startsWith("b!")) return;
+}
+    const content = msg.content.slice(num).split(" ");
     const [command, ...args]: string = content;
     const cmd: any = parseCmd(command, Commands)
 
@@ -32,10 +39,10 @@ export default event(Events.MessageCreate, ({ log }, msg: any) => {
     setTimeout(() => timestamps.delete(msg.author.id), cooldownAmount);
 
     try {
-            if(!cmd.enabled) return msg.channel.send("This command is disabled");
+            if(cmd.enabled === false) return msg.channel.send("This command is disabled");
             if(cmd.owner){
                 return msg.author.id === "1119420130112315452" ? cmd.execute(Client, msg, args) : msg.channel.send("This is an owner-only command...")
-            } else if(cmd.permissions.length > 0){
+            } else if(cmd.permissions && cmd.permissions.length > 0){
                 const permissions = cmd.permissions
                 for(const perm of permissions){
                     if(!msg.member.permissions.has(perm)) return msg.channel.send(`you don't have the required permission: ${perm}`)

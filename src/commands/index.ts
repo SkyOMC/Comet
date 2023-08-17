@@ -11,8 +11,10 @@ import help from './help.js';
 import hangman from './hangman.js';
 import snake from './snake.js';
 import profile from './profile.js';
+import server from './server.js';
+import about from './about.js';
 
-const arr: Array<any> = [
+const arr: object[] = [
     ping,
     cookie,
     antispam,
@@ -24,7 +26,9 @@ const arr: Array<any> = [
     help,
     snake,
     hangman,
-    profile
+    profile,
+    server,
+    about
 ]
 
 const file: any = {
@@ -33,7 +37,8 @@ const file: any = {
     cooldowns: new Collection()
 } 
 
-arr.forEach((val) => {
+
+arr.forEach((val: any) => {
     file.commands.set(val.name, val);
     val.aliases.forEach((element: any) => {
         file.aliases.set(element, val)
